@@ -5,6 +5,15 @@
  */
 
 require_once get_template_directory() . '/helpers/index.php';
+require_once get_template_directory() . '/models/index.php';
+
+if (!function_exists('uu_setting_theme_supports')) {
+    function uu_setting_theme_supports()
+    {
+        add_theme_support('title-tag');
+    }
+}
+add_action('after_setup_theme', 'uu_setting_theme_supports');
 
 if (!function_exists('uu_register_scripts')) {
     function uu_register_scripts()
@@ -18,3 +27,19 @@ if (!function_exists('uu_register_scripts')) {
     }
 }
 add_action('wp_enqueue_scripts', 'uu_register_scripts');
+
+if (!function_exists('uu_custom_queries')) {
+    function uu_custom_queries($query)
+    {
+        if (is_admin() && !$query->is_main_query()) return;
+
+        if (is_post_type_archive('event')) {
+            $eventPostType = new EventPostType();
+
+            foreach ($eventPostType->get_active_events_args() as $key => $value) {
+                $query->set($key, $value);
+            }
+        }
+    }
+}
+add_action('pre_get_posts', 'uu_custom_queries');

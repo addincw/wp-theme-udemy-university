@@ -9,11 +9,13 @@ if (!function_exists('uu_get_class_nav_item')) {
      * 
      * @return string Return css class name.
      */
-    function uu_get_class_nav_item($post_type = '', $add_cond = null)
+    function uu_get_class_nav_item($post_type = null, $add_cond = null)
     {
-        $passedCriteria = get_post_type() === $post_type;
+        $passedCriteria = false;
 
-        if (isset($add_cond)) $passedCriteria = $passedCriteria && $add_cond;
+        if (isset($post_type)) $passedCriteria = get_post_type() === $post_type;
+
+        if (isset($add_cond)) $passedCriteria = $passedCriteria || $add_cond;
 
         if ($passedCriteria) {
             return 'current-menu-item';

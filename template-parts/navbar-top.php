@@ -11,12 +11,12 @@
                 $parentPost = get_post_parent(get_the_ID());
                 $parentPostSlug = !is_null($parentPost) ? $parentPost->post_name : null;
                 ?>
-                <li class="<?php echo uu_get_class_nav_item('page', is_page('about-us') || $parentPostSlug === 'about-us'); ?>">
+                <li class="<?php echo uu_get_class_nav_item(null, is_page('about-us') || $parentPostSlug === 'about-us'); ?>">
                     <a href="<?php echo site_url('/about-us'); ?>">About Us</a>
                 </li>
                 <li><a href="#">Programs</a></li>
-                <li class="<?php echo uu_get_class_nav_item('event'); ?>">
-                    <a href="#">Events</a>
+                <li class="<?php echo uu_get_class_nav_item('event', is_page('past-events')); ?>">
+                    <a href="<?php echo get_post_type_archive_link('event') ?>">Events</a>
                 </li>
                 <li><a href="#">Campuses</a></li>
                 <li class="<?php echo uu_get_class_nav_item('post'); ?>">

@@ -24,9 +24,9 @@ get_header(); ?>
 
             <?php
             //get latest 2 event data
-            $qEvents = new WP_Query([
-                'post_type' => 'event',
-                'posts_per_page' => 2,
+            $eventPostType = new EventPostType();
+            $qEvents = $eventPostType->get_active_events([
+                'posts_per_page' => 2
             ]);
 
             while ($qEvents->have_posts()) :

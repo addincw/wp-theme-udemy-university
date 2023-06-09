@@ -39,7 +39,16 @@ get_header(); ?>
             <h4 class="headline">
                 <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
             </h4>
-            <p><?php echo wp_trim_words(get_the_content()); ?></p>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 1.15rem">
+                <div>
+                    Posted by <?php the_author_posts_link(); ?> | In <?php the_category(','); ?>
+                </div>
+                <time><?php the_time('d M, Y') ?></time>
+            </div>
+            <p>
+                <?php echo wp_trim_words(get_the_content()); ?>
+                <a href="<?php the_permalink() ?>" class="nu gray">Read more</a>
+            </p>
         </div>
 
         <hr class="section-break" />
