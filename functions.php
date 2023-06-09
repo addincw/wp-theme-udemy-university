@@ -4,8 +4,8 @@
  * Udemy University (uu) Function's.
  */
 
-require_once get_template_directory() . '/helpers/index.php';
-require_once get_template_directory() . '/models/index.php';
+require_once get_template_directory() . '/classes/index.php';
+require_once get_template_directory() . '/inc/index.php';
 
 if (!function_exists('uu_setting_theme_supports')) {
     function uu_setting_theme_supports()
