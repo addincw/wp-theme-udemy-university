@@ -14,7 +14,9 @@
                 <li class="<?php echo uu_get_class_nav_item(null, is_page('about-us') || $parentPostSlug === 'about-us'); ?>">
                     <a href="<?php echo site_url('/about-us'); ?>">About Us</a>
                 </li>
-                <li><a href="#">Programs</a></li>
+                <li class="<?php echo uu_get_class_nav_item('program'); ?>">
+                    <a href="<?php echo get_post_type_archive_link('program') ?>">Programs</a>
+                </li>
                 <li class="<?php echo uu_get_class_nav_item('event', is_page('past-events')); ?>">
                     <a href="<?php echo get_post_type_archive_link('event') ?>">Events</a>
                 </li>
