@@ -25,7 +25,7 @@ while (have_posts()) :
         <div class="metabox metabox--position-up metabox--with-home-link">
             <p>
                 <a class="metabox__blog-home-link" href="<?php echo site_url('/blogs'); ?>">
-                    <i class="fa fa-rss" aria-hidden="true"></i> Back to Blog
+                    <i class="fa fa-rss" aria-hidden="true"></i> See Another Blog
                 </a>
                 <span class="metabox__main">
                     Created by <?php the_author_link(); ?> on <?php the_time('d M, Y'); ?>. In <?php the_category(','); ?>
