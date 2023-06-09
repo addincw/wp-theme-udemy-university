@@ -7,7 +7,11 @@
     <div class="site-header__menu group">
         <nav class="main-navigation">
             <ul>
-                <li class="<?php echo uu_get_class_nav_item('page', is_page('about-us')); ?>">
+                <?php
+                $parentPost = get_post_parent(get_the_ID());
+                $parentPostSlug = !is_null($parentPost) ? $parentPost->post_name : null;
+                ?>
+                <li class="<?php echo uu_get_class_nav_item('page', is_page('about-us') || $parentPostSlug === 'about-us'); ?>">
                     <a href="<?php echo site_url('/about-us'); ?>">About Us</a>
                 </li>
                 <li><a href="#">Programs</a></li>
