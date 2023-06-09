@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The single post template file
+ * The single custom post type event template file
  *
  */
 
@@ -24,11 +24,11 @@ while (have_posts()) :
     <div class="container container--narrow page-section">
         <div class="metabox metabox--position-up metabox--with-home-link">
             <p>
-                <a class="metabox__blog-home-link" href="<?php echo site_url('/blogs'); ?>">
-                    <i class="fa fa-rss" aria-hidden="true"></i> See Another Blog
+                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('event'); ?>">
+                    <i class="fa fa-calendar-o" aria-hidden="true"></i> See Another Event
                 </a>
                 <span class="metabox__main">
-                    Created by <?php the_author_posts_link(); ?> on <?php the_time('d M, Y'); ?>. In <?php the_category(','); ?>
+                    Will held on <strong><?php the_time('d M, Y'); ?></strong>
                 </span>
             </p>
         </div>

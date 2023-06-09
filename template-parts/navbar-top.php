@@ -15,7 +15,9 @@
                     <a href="<?php echo site_url('/about-us'); ?>">About Us</a>
                 </li>
                 <li><a href="#">Programs</a></li>
-                <li><a href="#">Events</a></li>
+                <li class="<?php echo uu_get_class_nav_item('event'); ?>">
+                    <a href="#">Events</a>
+                </li>
                 <li><a href="#">Campuses</a></li>
                 <li class="<?php echo uu_get_class_nav_item('post'); ?>">
                     <a href="<?php echo site_url('/blogs'); ?>">Blog</a>

@@ -22,28 +22,25 @@ get_header(); ?>
         <div class="full-width-split__inner">
             <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
-            <div class="event-summary">
-                <a class="event-summary__date t-center" href="#">
-                    <span class="event-summary__month">Mar</span>
-                    <span class="event-summary__day">25</span>
-                </a>
-                <div class="event-summary__content">
-                    <h5 class="event-summary__title headline headline--tiny"><a href="#">Poetry in the 100</a></h5>
-                    <p>Bring poems you&rsquo;ve wrote to the 100 building this Tuesday for an open mic and snacks. <a href="#" class="nu gray">Learn more</a></p>
-                </div>
-            </div>
-            <div class="event-summary">
-                <a class="event-summary__date t-center" href="#">
-                    <span class="event-summary__month">Apr</span>
-                    <span class="event-summary__day">02</span>
-                </a>
-                <div class="event-summary__content">
-                    <h5 class="event-summary__title headline headline--tiny"><a href="#">Quad Picnic Party</a></h5>
-                    <p>Live music, a taco truck and more can found in our third annual quad picnic day. <a href="#" class="nu gray">Learn more</a></p>
-                </div>
-            </div>
+            <?php
+            //get latest 2 event data
+            $qEvents = new WP_Query([
+                'post_type' => 'event',
+                'posts_per_page' => 2,
+            ]);
 
-            <p class="t-center no-margin"><a href="#" class="btn btn--blue">View All Events</a></p>
+            while ($qEvents->have_posts()) :
+                $qEvents->the_post();
+
+                get_template_part('template-parts/event-summary');
+            endwhile;
+
+            wp_reset_postdata();
+            ?>
+
+            <p class="t-center no-margin">
+                <a href="<?php echo get_post_type_archive_link('event') ?>" class="btn btn--blue">View All Events</a>
+            </p>
         </div>
     </div>
     <div class="full-width-split__two">
@@ -55,7 +52,9 @@ get_header(); ?>
             while ($qBlogs->have_posts()) :
                 $qBlogs->the_post();
 
-                get_template_part('template-parts/event-summary');
+                get_template_part('template-parts/event-summary', null, [
+                    'date_style' => 'beige',
+                ]);
             endwhile;
 
             wp_reset_postdata();
