@@ -36,7 +36,7 @@ get_header(); ?>
         $qPastEvents->the_post();
     ?>
         <div class="generic-content">
-            <?php get_template_part('template-parts/event-summary') ?>
+            <?php get_template_part('template-parts/content/event-summary') ?>
         </div>
 
         <hr class="section-break" />

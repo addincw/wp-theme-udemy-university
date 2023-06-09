@@ -9,5 +9,5 @@
 
 <body <?php body_class(); ?>>
     <header class="site-header">
-        <?php get_template_part('template-parts/navbar-top'); ?>
+        <?php get_template_part('template-parts/navigation/navbar-top'); ?>
     </header>

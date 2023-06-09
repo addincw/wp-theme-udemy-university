@@ -32,7 +32,7 @@ get_header(); ?>
             while ($qEvents->have_posts()) :
                 $qEvents->the_post();
 
-                get_template_part('template-parts/event-summary');
+                get_template_part('template-parts/content/event-summary');
             endwhile;
 
             wp_reset_postdata();
@@ -52,7 +52,7 @@ get_header(); ?>
             while ($qBlogs->have_posts()) :
                 $qBlogs->the_post();
 
-                get_template_part('template-parts/event-summary', null, [
+                get_template_part('template-parts/content/event-summary', null, [
                     'date_style' => 'beige',
                 ]);
             endwhile;
