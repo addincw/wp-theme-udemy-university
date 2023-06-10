@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The single program template file
+ * The single professor template file
  *
  */
 
@@ -15,24 +15,22 @@ while (have_posts()) :
         <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('assets/images/ocean.jpg'); ?>)"></div>
         <div class="page-banner__content container container--narrow">
             <h1 class="page-banner__title"><?php the_title() ?></h1>
+            <div class="page-banner__intro">
+                <p><?php if (has_excerpt()) the_excerpt(); ?></p>
+            </div>
         </div>
     </div>
 
     <div class="container container--narrow page-section">
-        <div class="metabox metabox--position-up metabox--with-home-link">
-            <p>
-                <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>">
-                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> See Another Programs
-                </a>
-                <!-- TODO: add custom post type campus, then adding custom field campus on program -->
-                <span class="metabox__main">
-                    Available at campus: xxx, xxx
-                </span>
-            </p>
-        </div>
-
-        <div class="generic-content">
-            <?php the_content(); ?>
+        <div class="row group">
+            <div class="one-third">
+                <?php the_post_thumbnail(); ?>
+            </div>
+            <div class="two-thirds">
+                <div class="generic-content">
+                    <?php the_content(); ?>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -44,29 +42,25 @@ while (have_posts()) :
         </div>
     </div> -->
 
-    <!-- professor's section -->
+    <!-- programs section -->
     <div class="page-section page-section--white">
         <div class="container container--narrow">
-            <h2 class="headline headline--medium"><?php the_title(); ?> Professors:</h2>
+            <h2 class="headline headline--medium">Subject(s) Taught:</h2>
 
-            <?php $professors = get_field('professors') ?? []; ?>
-
-            <?php if (count($professors) === 0) : ?>
-                <p class="metabox">Currently there are no lecturers teaching for this program.</p>
-            <?php endif; ?>
-
-            <ul class="professor-cards">
+            <ul class="link-list min-list">
                 <?php
-                /** @var WP_Post $professor */
-                foreach ($professors as $professor) :
+                $professorPostType = new ProfessorPostType();
+                $qProfessorPrograms = $professorPostType->get_programs(get_the_ID());
+
+                while ($qProfessorPrograms->have_posts()) :
+                    $qProfessorPrograms->the_post();
                 ?>
-                    <li class="professor-card__list-item">
-                        <a href="<?php echo get_post_permalink($professor->ID); ?>" class="professor-card">
-                            <img class="professor-card__image" src="<?php echo get_the_post_thumbnail_url($professor->ID, 'medium'); ?>" alt="<?php echo $professor->post_title; ?>" />
-                            <span class="professor-card__name"><?php echo $professor->post_title; ?></span>
+                    <li>
+                        <a href="<?php echo get_the_permalink(); ?>">
+                            <?php the_title(); ?>
                         </a>
                     </li>
-                <?php endforeach; ?>
+                <?php endwhile; ?>
             </ul>
         </div>
     </div>
