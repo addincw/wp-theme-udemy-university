@@ -24,6 +24,7 @@ while (have_posts()) :
     <div class="container container--narrow page-section">
         <div class="row group">
             <div class="one-third">
+                <!-- TODO: issue custom size image not working -->
                 <?php the_post_thumbnail(); ?>
             </div>
             <div class="two-thirds">

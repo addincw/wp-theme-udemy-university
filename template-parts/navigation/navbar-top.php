@@ -20,7 +20,9 @@
                 <li class="<?php echo uu_get_class_nav_item('event', is_page('past-events')); ?>">
                     <a href="<?php echo get_post_type_archive_link('event') ?>">Events</a>
                 </li>
-                <li><a href="#">Campuses</a></li>
+                <li class="<?php echo uu_get_class_nav_item('campus'); ?>">
+                    <a href="<?php echo get_post_type_archive_link('campus') ?>">Campuses</a>
+                </li>
                 <li class="<?php echo uu_get_class_nav_item('post'); ?>">
                     <a href="<?php echo site_url('/blogs'); ?>">Blog</a>
                 </li>

@@ -24,9 +24,19 @@ while (have_posts()) :
                 <a class="metabox__blog-home-link" href="<?php echo get_post_type_archive_link('program'); ?>">
                     <i class="fa fa-graduation-cap" aria-hidden="true"></i> See Another Programs
                 </a>
-                <!-- TODO: add custom post type campus, then adding custom field campus on program -->
+
+                <?php
+                $campusLinks = [];
+
+                /** @var WP_Post[] $campuses */
+                $campuses = get_field('available_campuses');
+                foreach ($campuses as $campus) {
+                    $campusHref = get_permalink($campus->ID);
+                    array_push($campusLinks, "<a href=\"{$campusHref}\" title=\"{$campus->post_title}\">{$campus->post_title}</a>");
+                }
+                ?>
                 <span class="metabox__main">
-                    Available at campus: xxx, xxx
+                    Available at campus: <?php echo implode(', ', $campusLinks); ?>
                 </span>
             </p>
         </div>
@@ -49,25 +59,26 @@ while (have_posts()) :
         <div class="container container--narrow">
             <h2 class="headline headline--medium"><?php the_title(); ?> Professors:</h2>
 
-            <?php $professors = get_field('professors') ?? []; ?>
-
-            <?php if (count($professors) === 0) : ?>
+            <?php
+            $professors = get_field('professors');
+            if (is_array($professors) && count($professors) > 0) :
+            ?>
+                <ul class="professor-cards">
+                    <?php
+                    /** @var WP_Post $professor */
+                    foreach ($professors as $professor) :
+                    ?>
+                        <li class="professor-card__list-item">
+                            <a href="<?php echo get_post_permalink($professor->ID); ?>" class="professor-card">
+                                <img class="professor-card__image" src="<?php echo get_the_post_thumbnail_url($professor->ID, 'medium'); ?>" alt="<?php echo $professor->post_title; ?>" />
+                                <span class="professor-card__name"><?php echo $professor->post_title; ?></span>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else : ?>
                 <p class="metabox">Currently there are no lecturers teaching for this program.</p>
             <?php endif; ?>
-
-            <ul class="professor-cards">
-                <?php
-                /** @var WP_Post $professor */
-                foreach ($professors as $professor) :
-                ?>
-                    <li class="professor-card__list-item">
-                        <a href="<?php echo get_post_permalink($professor->ID); ?>" class="professor-card">
-                            <img class="professor-card__image" src="<?php echo get_the_post_thumbnail_url($professor->ID, 'medium'); ?>" alt="<?php echo $professor->post_title; ?>" />
-                            <span class="professor-card__name"><?php echo $professor->post_title; ?></span>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
         </div>
     </div>
 
