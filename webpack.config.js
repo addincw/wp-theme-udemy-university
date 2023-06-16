@@ -6,12 +6,16 @@ const isProduction = process.env.NODE_ENV == "production";
 
 const stylesHandler = "style-loader";
 
+/** @type import('webpack').Configuration */
 const config = {
   entry: "./src/index.ts",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "assets", "js"),
     clean: true,
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
   },
   module: {
     rules: [
