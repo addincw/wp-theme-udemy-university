@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV == "production";
 const stylesHandler = "style-loader";
 
 const config = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "assets", "js"),
@@ -16,8 +16,9 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/i,
-        loader: "babel-loader",
+        test: /\.tsx?$/i,
+        use: "ts-loader",
+        exclude: /node-modules/,
       },
       {
         test: /\.s[ac]ss$/i,
@@ -39,6 +40,7 @@ module.exports = () => {
     config.mode = "production";
   } else {
     config.mode = "development";
+    config.devtool = "inline-source-map";
   }
   return config;
 };
