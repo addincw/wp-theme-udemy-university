@@ -405,7 +405,8 @@ body.login .button-primary:focus,
 body.login .button-primary:hover {
   background-color: #f8411d;
   border-color: #f95738;
-  text-shadow: 0 -1px 1px #ed2c07, 1px 0 1px #ed2c07, 0 1px 1px #ed2c07, -1px 0 1px #ed2c07;
+  text-shadow: 0 -1px 1px #ed2c07, 1px 0 1px #ed2c07, 0 1px 1px #ed2c07,
+    -1px 0 1px #ed2c07;
   box-shadow: 0 1px 0 #de2907;
 }
 body.login {
@@ -1060,6 +1061,39 @@ body.admin-bar .search-overlay {
   margin-right: 10px;
   font-size: 1.8rem;
   color: #f95738;
+}
+#search-overlay__results .link-list.min-list li a,
+#search-overlay__results
+  .professor-cards
+  .professor-card__list-item
+  .professor-card
+  .professor-card__name,
+#search-overlay__results
+  .event-summary
+  .event-summary__content
+  .event-summary__title,
+#search-overlay__results .event-summary .event-summary__content p {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#search-overlay__results
+  .professor-cards
+  .professor-card__list-item
+  .professor-card
+  .professor-card__name {
+  -webkit-line-clamp: 1;
+}
+#search-overlay__results .event-summary .event-summary__content p {
+  -webkit-line-clamp: 3;
+}
+.search-overlay__results--center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 86px);
 }
 @media (min-width: 960px) {
   .search-overlay__icon {

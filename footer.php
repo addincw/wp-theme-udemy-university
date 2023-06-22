@@ -4,6 +4,8 @@
         </div>
     </footer>
 
+    <?php get_template_part('template-parts/navigation/search-dialog'); ?>
+
     <?php wp_footer(); ?>
     </body>
 
