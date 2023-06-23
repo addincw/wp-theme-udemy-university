@@ -1,25 +1,14 @@
-import { getSearch } from "../../api";
-import SearchResult from "./SearchResult";
-
 class SearchField {
-  DialogBody: HTMLElement;
-  Loader: HTMLDivElement;
   SearchField: HTMLInputElement;
 
   debounce: NodeJS.Timeout;
   oldKeyword = "";
 
   constructor() {
-    this.DialogBody = document.querySelector("#search-overlay__results");
-
-    const Loader = document.createElement("div");
-    Loader.classList.add("spinner-loader");
-    this.Loader = Loader;
-
     this.SearchField = document.querySelector("#search-term");
   }
 
-  enable() {
+  enable(debounceCallback?: (keyword: string) => void) {
     this.SearchField.addEventListener("keyup", (e) => {
       const keyword = (e.target as HTMLInputElement).value;
 
@@ -28,14 +17,8 @@ class SearchField {
       clearTimeout(this.debounce);
 
       this.debounce = setTimeout(async () => {
-        this.DialogBody.classList.add("search-overlay__results--center");
-        this.DialogBody.replaceChildren(this.Loader);
-
-        const results = await getSearch(keyword);
+        debounceCallback?.(keyword);
         this.oldKeyword = keyword;
-
-        this.DialogBody.classList.remove("search-overlay__results--center");
-        this.DialogBody.replaceChildren(new SearchResult(results).render());
       }, 300);
     });
   }

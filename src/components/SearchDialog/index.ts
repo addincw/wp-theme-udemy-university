@@ -1,10 +1,13 @@
+import { getSearch } from "../../api";
 import SearchField from "./SearchField";
+import SearchResult from "./SearchResult";
 
 class SearchDialog {
   BtnOpens: NodeListOf<HTMLElement>;
   BtnClose: HTMLElement;
   Dialog: HTMLElement;
   DialogBody: HTMLElement;
+  Loader: HTMLDivElement;
   SearchField: SearchField;
 
   constructor() {
@@ -13,6 +16,10 @@ class SearchDialog {
 
     this.Dialog = document.querySelector(".search-overlay");
     this.DialogBody = document.querySelector("#search-overlay__results");
+
+    const Loader = document.createElement("div");
+    Loader.classList.add("spinner-loader");
+    this.Loader = Loader;
 
     this.SearchField = new SearchField();
   }
@@ -23,7 +30,15 @@ class SearchDialog {
     });
     this.BtnClose.addEventListener("click", this._close.bind(this));
 
-    this.SearchField.enable();
+    this.SearchField.enable(async (keyword: string) => {
+      this.DialogBody.classList.add("search-overlay__results--center");
+      this.DialogBody.replaceChildren(this.Loader);
+
+      const results = await getSearch(keyword);
+
+      this.DialogBody.classList.remove("search-overlay__results--center");
+      this.DialogBody.replaceChildren(new SearchResult(results).render());
+    });
   }
 
   _shortcut(e: KeyboardEvent) {
