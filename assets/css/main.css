@@ -1062,6 +1062,9 @@ body.admin-bar .search-overlay {
   font-size: 1.8rem;
   color: #f95738;
 }
+#search-overlay__results .link-list.min-list li {
+  padding: 1rem 0 0;
+}
 #search-overlay__results .link-list.min-list li a,
 #search-overlay__results
   .professor-cards
@@ -1075,16 +1078,16 @@ body.admin-bar .search-overlay {
 #search-overlay__results .event-summary .event-summary__content p {
   display: -webkit-box;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 #search-overlay__results
-  .professor-cards
-  .professor-card__list-item
-  .professor-card
-  .professor-card__name {
-  -webkit-line-clamp: 1;
+  .event-summary
+  .event-summary__content
+  .event-summary__title,
+#search-overlay__results .event-summary .event-summary__content p {
+  -webkit-line-clamp: 2;
 }
 #search-overlay__results .event-summary .event-summary__content p {
   -webkit-line-clamp: 3;

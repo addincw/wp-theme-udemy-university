@@ -1,4 +1,11 @@
-import { getSearch } from "../../api";
+import {
+  getSearchCampuses,
+  getSearchEvents,
+  getSearchPosts,
+  getSearchProfessors,
+  getSearchPrograms,
+} from "../../api";
+import { TResultEvent, TResultPost, TResults } from "../../types";
 import SearchField from "./SearchField";
 import SearchResult from "./SearchResult";
 
@@ -30,15 +37,42 @@ class SearchDialog {
     });
     this.BtnClose.addEventListener("click", this._close.bind(this));
 
-    this.SearchField.enable(async (keyword: string) => {
-      this.DialogBody.classList.add("search-overlay__results--center");
-      this.DialogBody.replaceChildren(this.Loader);
+    this.SearchField.enable(this._doSearch.bind(this));
+  }
 
-      const results = await getSearch(keyword);
+  _doSearch(keyword: string) {
+    this.DialogBody.classList.add("search-overlay__results--center");
+    this.DialogBody.replaceChildren(this.Loader);
 
-      this.DialogBody.classList.remove("search-overlay__results--center");
-      this.DialogBody.replaceChildren(new SearchResult(results).render());
-    });
+    type TSetResult =
+      | PromiseSettledResult<TResultEvent[]>
+      | PromiseSettledResult<TResultPost[]>;
+
+    const getFulValue = (settled: TSetResult): TResultPost[] => {
+      if (settled.status !== "fulfilled") return [];
+      return settled.value;
+    };
+
+    Promise.allSettled([
+      getSearchEvents(keyword),
+      getSearchCampuses(keyword),
+      getSearchPosts(keyword),
+      getSearchPrograms(keyword),
+      getSearchProfessors(keyword),
+    ]).then(
+      ([setEvents, setCampuses, setPosts, setPrograms, setProfessors]) => {
+        const results = {
+          events: getFulValue(setEvents) as TResultEvent[],
+          campuses: getFulValue(setCampuses),
+          posts: getFulValue(setPosts),
+          programs: getFulValue(setPrograms),
+          professors: getFulValue(setProfessors),
+        };
+
+        this.DialogBody.classList.remove("search-overlay__results--center");
+        this.DialogBody.replaceChildren(new SearchResult(results).render());
+      }
+    );
   }
 
   _shortcut(e: KeyboardEvent) {

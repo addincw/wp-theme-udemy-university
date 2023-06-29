@@ -1,4 +1,4 @@
-import { TResultPost } from "../../types";
+import { TAuthor, TResultPost } from "../../types";
 
 class ResultGeneral {
   data;
@@ -7,9 +7,17 @@ class ResultGeneral {
   }
 
   render() {
-    const items = this.data.map(
-      (item) => `<li><a href="${item.link}">${item.title.rendered}</a></li>`
-    );
+    const items = this.data.map((item) => {
+      const [author] = item._embedded?.author ?? [];
+
+      const isPost = item.type === "post";
+      const createdBy = isPost && author?.name ? `by ${author.name}` : "";
+
+      return `<li>
+        <a href="${item.link}">${item.title.rendered}</a>
+        ${createdBy}
+      </li>`;
+    });
 
     return `
       <ul class="link-list min-list">

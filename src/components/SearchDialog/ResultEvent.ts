@@ -1,9 +1,9 @@
-import { TResultPost } from "../../types";
+import { TResultEvent } from "../../types";
 
 class ResultEvent {
   data;
-  constructor(data: TResultPost[]) {
-    this.data = data;
+  constructor(data?: TResultEvent[]) {
+    this.data = data ?? [];
   }
 
   render() {
@@ -27,7 +27,10 @@ class ResultEvent {
               <h5 class="event-summary__title headline headline--tiny">
                   <a href="${item.link}">${item.title.rendered}</a>
               </h5>
-              <p>${item.excerpt.rendered} <a href="${item.link}" class="nu gray">Read more</a></p>
+              <p>
+                ${item.excerpt?.rendered ?? ""}
+                <a href="${item.link}" class="nu gray">Read more</a>
+              </p>
           </div>
         </div>`;
       })
