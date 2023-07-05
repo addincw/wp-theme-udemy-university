@@ -34,11 +34,11 @@ if (!function_exists('uu_register_scripts')) {
 add_action('wp_enqueue_scripts', 'uu_register_scripts');
 
 if (!function_exists('uu_modify_default_queries')) {
-    function uu_modify_default_queries($query)
+    function uu_modify_default_queries(WP_Query $query)
     {
         if (is_admin() && !$query->is_main_query()) return;
 
-        if (is_post_type_archive('event')) {
+        if (is_post_type_archive('event') || preg_match('/wp-json\/[a-z\d]+\/v\d+\/event/', $_SERVER['REQUEST_URI'])) {
             $eventPostType = new EventPostType();
 
             foreach ($eventPostType->get_active_events_args() as $key => $value) {

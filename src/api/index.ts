@@ -7,7 +7,6 @@ const FETCH_OPTS = {
   },
 };
 
-// TODO: bug, still showing old event, and in admin page old event not show (should show)
 export async function getSearchEvents(keyword: string): Promise<ResultEvent[]> {
   const params = new URLSearchParams({
     search: keyword,
