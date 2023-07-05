@@ -1,8 +1,8 @@
-import { TResultEvent } from "../../types";
+import { ResultEvent } from "../../types";
 
 class ResultEvent {
   data;
-  constructor(data?: TResultEvent[]) {
+  constructor(data?: ResultEvent[]) {
     this.data = data ?? [];
   }
 

@@ -1,4 +1,4 @@
-export type TAuthor = {
+export type Author = {
   id: number;
   name: string;
   link: string;
@@ -7,7 +7,7 @@ export type TAuthor = {
   };
 };
 
-export type TFeaturedMedia = {
+export type FeaturedMedia = {
   id: string;
   date: string;
   alt_text: string;
@@ -25,33 +25,33 @@ export type TFeaturedMedia = {
   source_url: string;
 };
 
-export type TRendered = {
+export type Rendered = {
   rendered: string;
 };
 
-export type TResultPost = {
+export type ResultPost = {
   id: number;
-  title: TRendered;
+  title: Rendered;
   link: string;
   type: string;
   _embedded?: {
-    author?: TAuthor[];
-    "wp:featuredmedia"?: TFeaturedMedia[];
+    author?: Author[];
+    "wp:featuredmedia"?: FeaturedMedia[];
     [key: string]: object[];
   };
 };
-export type TResultEvent = TResultPost & {
-  excerpt: TRendered;
+export type ResultEvent = ResultPost & {
+  excerpt: Rendered;
   date: string;
 };
-export type TResultProfessor = TResultPost & {
+export type ResultProfessor = ResultPost & {
   date: string;
 };
 
-export type TResults = {
-  campuses: TResultPost[];
-  events: TResultEvent[];
-  posts: TResultPost[];
-  programs: TResultPost[];
-  professors: TResultPost[];
+export type SearchResult = {
+  campuses: ResultPost[];
+  events: ResultEvent[];
+  posts: ResultPost[];
+  programs: ResultPost[];
+  professors: ResultPost[];
 };

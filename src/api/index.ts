@@ -1,4 +1,4 @@
-import { TResultEvent, TResultPost } from "../types";
+import { ResultEvent, ResultPost } from "../types";
 
 const BASE_URL = "/wp-json";
 const FETCH_OPTS = {
@@ -8,9 +8,7 @@ const FETCH_OPTS = {
 };
 
 // TODO: bug, still showing old event, and in admin page old event not show (should show)
-export async function getSearchEvents(
-  keyword: string
-): Promise<TResultEvent[]> {
+export async function getSearchEvents(keyword: string): Promise<ResultEvent[]> {
   const params = new URLSearchParams({
     search: keyword,
     per_page: "4",
@@ -24,7 +22,7 @@ export async function getSearchEvents(
 
 export async function getSearchCampuses(
   keyword: string
-): Promise<TResultPost[]> {
+): Promise<ResultPost[]> {
   const params = new URLSearchParams({
     search: keyword,
     per_page: "4",
@@ -36,7 +34,7 @@ export async function getSearchCampuses(
   return await resp.json();
 }
 
-export async function getSearchPosts(keyword: string): Promise<TResultPost[]> {
+export async function getSearchPosts(keyword: string): Promise<ResultPost[]> {
   const params = new URLSearchParams({
     _embed: "author",
     search: keyword,
@@ -51,7 +49,7 @@ export async function getSearchPosts(keyword: string): Promise<TResultPost[]> {
 
 export async function getSearchPrograms(
   keyword: string
-): Promise<TResultPost[]> {
+): Promise<ResultPost[]> {
   const params = new URLSearchParams({
     search: keyword,
     per_page: "4",
@@ -65,7 +63,7 @@ export async function getSearchPrograms(
 
 export async function getSearchProfessors(
   keyword: string
-): Promise<TResultPost[]> {
+): Promise<ResultPost[]> {
   const params = new URLSearchParams({
     _embed: "wp:featuredmedia",
     search: keyword,

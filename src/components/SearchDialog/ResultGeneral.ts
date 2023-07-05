@@ -1,8 +1,8 @@
-import { TAuthor, TResultPost } from "../../types";
+import { Author, ResultPost } from "../../types";
 
 class ResultGeneral {
   data;
-  constructor(data: TResultPost[]) {
+  constructor(data: ResultPost[]) {
     this.data = data;
   }
 

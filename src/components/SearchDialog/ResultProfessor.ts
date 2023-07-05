@@ -1,8 +1,8 @@
-import { TResultPost } from "../../types";
+import { ResultPost } from "../../types";
 
 class ResultProfessor {
   data;
-  constructor(data: TResultPost[]) {
+  constructor(data: ResultPost[]) {
     this.data = data;
   }
 

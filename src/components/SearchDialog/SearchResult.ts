@@ -1,4 +1,4 @@
-import { TResults } from "../../types";
+import { SearchResult } from "../../types";
 import ResultEvent from "./ResultEvent";
 import ResultGeneral from "./ResultGeneral";
 import ResultProfessor from "./ResultProfessor";
@@ -7,7 +7,7 @@ class SearchResult {
   Container;
   data;
 
-  constructor(data: TResults) {
+  constructor(data: SearchResult) {
     this.data = data;
 
     const Container = document.createElement("div");

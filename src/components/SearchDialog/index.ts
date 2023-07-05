@@ -5,7 +5,7 @@ import {
   getSearchProfessors,
   getSearchPrograms,
 } from "../../api";
-import { TResultEvent, TResultPost, TResults } from "../../types";
+import { ResultEvent, ResultPost, SearchResult } from "../../types";
 import SearchField from "./SearchField";
 import SearchResult from "./SearchResult";
 
@@ -45,10 +45,10 @@ class SearchDialog {
     this.DialogBody.replaceChildren(this.Loader);
 
     type TSetResult =
-      | PromiseSettledResult<TResultEvent[]>
-      | PromiseSettledResult<TResultPost[]>;
+      | PromiseSettledResult<ResultEvent[]>
+      | PromiseSettledResult<ResultPost[]>;
 
-    const getFulValue = (settled: TSetResult): TResultPost[] => {
+    const getFulValue = (settled: TSetResult): ResultPost[] => {
       if (settled.status !== "fulfilled") return [];
       return settled.value;
     };
@@ -62,7 +62,7 @@ class SearchDialog {
     ]).then(
       ([setEvents, setCampuses, setPosts, setPrograms, setProfessors]) => {
         const results = {
-          events: getFulValue(setEvents) as TResultEvent[],
+          events: getFulValue(setEvents) as ResultEvent[],
           campuses: getFulValue(setCampuses),
           posts: getFulValue(setPosts),
           programs: getFulValue(setPrograms),
