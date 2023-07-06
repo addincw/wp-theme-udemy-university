@@ -20,11 +20,11 @@ get_header(); ?>
 <div class="container container--narrow page-section">
     <div class="metabox metabox--position-up metabox--with-home-link">
         <p>
-            <span class="metabox__blog-home-link">
+            <button class="metabox__blog-home-link create-note-dialog__open">
                 <i class="fa fa-sticky-note"></i>
                 &nbsp;
                 Create new note
-            </span>
+            </button>
             <span class="metabox__main">
                 <?php
                 $totalPosts = wp_count_posts()->publish;
@@ -36,7 +36,7 @@ get_header(); ?>
         </p>
     </div>
 
-    <?php get_template_part('template-parts/content/note-modal') ?>
+    <?php get_template_part('template-parts/content/note-dialog') ?>
 
     <ul class="min-list link-list" id="my-notes">
         <?php

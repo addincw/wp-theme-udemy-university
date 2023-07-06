@@ -4,6 +4,8 @@ class HeroSlider {
   selector = ".hero-slider";
 
   enable() {
+    if (!document.querySelector(this.selector)) return;
+
     const options: Partial<Options> = {
       type: "carousel",
       perView: 1,

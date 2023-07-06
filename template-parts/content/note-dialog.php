@@ -5,9 +5,9 @@
  *                      - show_page_link => boolean, Default use false.
  */
 ?>
-<div class="create-note-modal create-note-modal--show">
-    <div class="create-note-modal__content">
-        <button class="create-note-modal__close" type="button">
+<div class="create-note-dialog">
+    <div class="create-note-dialog__content" onclick="event.stopPropagation();">
+        <button class="create-note-dialog__close" type="button">
             &times;
         </button>
 

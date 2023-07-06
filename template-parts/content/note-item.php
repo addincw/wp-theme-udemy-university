@@ -2,16 +2,16 @@
     <input readonly class="note-title-field" value="<?php echo str_replace('Private: ', '', esc_attr(get_the_title())); ?>">
 
     <div class="actions">
-        <span class="edit-note">
+        <button class="edit-note">
             <i class="fa fa-pencil" aria-hidden="true"></i>
             &nbsp;
             Edit
-        </span>
-        <span class="delete-note">
+        </button>
+        <button class="delete-note">
             <i class="fa fa-trash-o" aria-hidden="true"></i>
             &nbsp;
             Delete
-        </span>
+        </button>
     </div>
 
     <textarea readonly class="note-body-field"><?php echo esc_textarea(wp_strip_all_tags(get_the_content())); ?></textarea>
