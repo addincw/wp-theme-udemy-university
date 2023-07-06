@@ -36,8 +36,6 @@ get_header(); ?>
         </p>
     </div>
 
-    <?php get_template_part('template-parts/content/note-dialog') ?>
-
     <ul class="min-list link-list" id="my-notes">
         <?php
         $myNotePostType = new MyNotePostType();
