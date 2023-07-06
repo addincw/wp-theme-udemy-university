@@ -19,6 +19,7 @@ export async function getSearchEvents(keyword: string): Promise<ResultEvent[]> {
   return await resp.json();
 }
 
+// TODO: should return only matched title
 export async function getSearchCampuses(
   keyword: string
 ): Promise<ResultPost[]> {
@@ -60,6 +61,7 @@ export async function getSearchPrograms(
   return await resp.json();
 }
 
+// TODO: should return only matched title, or professor related program
 export async function getSearchProfessors(
   keyword: string
 ): Promise<ResultPost[]> {
