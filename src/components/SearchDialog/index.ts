@@ -7,7 +7,7 @@ import {
 } from "../../api";
 import { ResultEvent, ResultPost, SearchResult } from "../../types";
 import SearchField from "./SearchField";
-import SearchResult from "./SearchResult";
+import SearchResultClass from "./SearchResult";
 
 class SearchDialog {
   BtnOpens: NodeListOf<HTMLElement>;
@@ -44,11 +44,11 @@ class SearchDialog {
     this.DialogBody.classList.add("search-overlay__results--center");
     this.DialogBody.replaceChildren(this.Loader);
 
-    type TSetResult =
+    type SettledResult =
       | PromiseSettledResult<ResultEvent[]>
       | PromiseSettledResult<ResultPost[]>;
 
-    const getFulValue = (settled: TSetResult): ResultPost[] => {
+    const getFulValue = (settled: SettledResult): ResultPost[] => {
       if (settled.status !== "fulfilled") return [];
       return settled.value;
     };
@@ -70,7 +70,9 @@ class SearchDialog {
         };
 
         this.DialogBody.classList.remove("search-overlay__results--center");
-        this.DialogBody.replaceChildren(new SearchResult(results).render());
+        this.DialogBody.replaceChildren(
+          new SearchResultClass(results).render()
+        );
       }
     );
   }

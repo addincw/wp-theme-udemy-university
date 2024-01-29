@@ -14,12 +14,15 @@
         <div class="create-note">
             <h2 class="headline headline--medium">Create New Note</h2>
 
-            <input class="new-note-title" placeholder="Title">
-            <textarea class="new-note-body" placeholder="Your note here..."></textarea>
+            <form>
+                <input class="new-note-title" name="title" placeholder="Title">
+                <textarea class="new-note-body" name="content" placeholder="Your note here..."></textarea>
 
-            <button class="submit-note">Create Note</button>
+                <button type="button" class="submit-note">Create Note</button>
+            </form>
 
-            <span class="note-limit-message">
+
+            <span class="create-note__message">
                 Note limit reached: delete an existing note to make room for a new one.
             </span>
 
@@ -28,6 +31,10 @@
                     <a href="<?php echo site_url('/my-notes'); ?>">view notes that have been saved →</a>
                 </p>
             <?php endif; ?>
+        </div>
+
+        <div class="create-note__loading">
+            <div class="spinner-loader"></div>
         </div>
     </div>
 </div>

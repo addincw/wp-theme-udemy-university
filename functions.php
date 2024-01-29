@@ -29,6 +29,10 @@ if (!function_exists('uu_register_scripts')) {
         wp_enqueue_style('maincss', get_theme_file_uri('assets/css/main.css'));
 
         wp_enqueue_script('mainjs', get_theme_file_uri('assets/js/main.js'), ['jquery'], false, true);
+
+        $bindNonceScript = "const nt = '" . wp_create_nonce('wp_rest') . "';";
+        $bindNonceScript .= "document.getElementsByTagName('body')[0].setAttribute('data-nt', nt);";
+        wp_add_inline_script('mainjs', $bindNonceScript, 'before');
     }
 }
 add_action('wp_enqueue_scripts', 'uu_register_scripts');

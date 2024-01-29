@@ -3,7 +3,7 @@ import ResultEvent from "./ResultEvent";
 import ResultGeneral from "./ResultGeneral";
 import ResultProfessor from "./ResultProfessor";
 
-class SearchResult {
+class SearchResultClass {
   Container;
   data;
 
@@ -59,4 +59,4 @@ class SearchResult {
   }
 }
 
-export default SearchResult;
+export default SearchResultClass;

@@ -26,12 +26,22 @@ export type FeaturedMedia = {
 };
 
 export type Rendered = {
+  raw: string;
   rendered: string;
+};
+
+export type ResultError = {
+  code: string;
+  data: {
+    status: number;
+  };
+  message: string;
 };
 
 export type ResultPost = {
   id: number;
   title: Rendered;
+  content?: Rendered;
   link: string;
   type: string;
   _embedded?: {
@@ -54,4 +64,8 @@ export type SearchResult = {
   posts: ResultPost[];
   programs: ResultPost[];
   professors: ResultPost[];
+};
+
+export type RequestData = {
+  [key: string]: string;
 };

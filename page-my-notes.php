@@ -1,11 +1,16 @@
 <?php
+// manually prevent unauthorize user access this page.
+if (!is_user_logged_in() || get_current_user_id() === 0) {
+    wp_redirect(wp_login_url('/my-notes', true));
+    exit;
+}
 
 /**
  * The archive template file
  *
  */
-
-get_header(); ?>
+get_header();
+?>
 
 <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('assets/images/ocean.jpg'); ?>)"></div>
@@ -20,7 +25,7 @@ get_header(); ?>
 <div class="container container--narrow page-section">
     <div class="metabox metabox--position-up metabox--with-home-link">
         <p>
-            <button class="metabox__blog-home-link create-note-dialog__open">
+            <button class="metabox__blog-home-link create-note-dialog__open" data-inpage="1">
                 <i class="fa fa-sticky-note"></i>
                 &nbsp;
                 Create new note
@@ -39,7 +44,7 @@ get_header(); ?>
     <ul class="min-list link-list" id="my-notes">
         <?php
         $myNotePostType = new MyNotePostType();
-        $qMyNotes = $myNotePostType->get_notes();
+        $qMyNotes = $myNotePostType->get_notes(get_current_user_id());
 
         while ($qMyNotes->have_posts()) :
             $qMyNotes->the_post();

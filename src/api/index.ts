@@ -1,11 +1,5 @@
 import { ResultEvent, ResultPost } from "../types";
-
-const BASE_URL = "/wp-json";
-const FETCH_OPTS = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
+import { BASE_URL, FETCH_OPTS } from "./config";
 
 export async function getSearchEvents(keyword: string): Promise<ResultEvent[]> {
   const params = new URLSearchParams({

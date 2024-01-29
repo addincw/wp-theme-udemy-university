@@ -1,3 +1,5 @@
+import { ResultPost } from "../types";
+
 class MyNoteList {
   MyNoteItems: NodeListOf<HTMLLIElement>;
 
@@ -25,6 +27,40 @@ class MyNoteList {
         this._updateItem.bind(this, MyNoteItem)
       );
     });
+  }
+
+  static appendItem(data: ResultPost) {
+    const itemHTML = `
+      <li data-id="${data.id}">
+        <form>
+            <input readonly="" class="note-title-field" name="title" value="${data.title.raw}">
+
+            <div class="actions">
+                <button type="button" class="edit-note">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    &nbsp;
+                    Edit
+                </button>
+                <button type="button" class="delete-note">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    &nbsp;
+                    Delete
+                </button>
+            </div>
+
+            <textarea readonly="" class="note-body-field" name="body">${data.content?.raw}</textarea>
+
+            <button type="button" class="update-note btn btn--blue btn--small">
+                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                &nbsp;
+                Save
+            </button>
+        </form>
+      </li>
+    `;
+
+    const MyNoteUl = document.querySelector("ul#my-notes");
+    MyNoteUl.insertAdjacentHTML("afterbegin", itemHTML);
   }
 
   _toggleItemEdit(ThisBtnEdit: HTMLButtonElement, MyNoteItem: HTMLLIElement) {
@@ -62,7 +98,16 @@ class MyNoteList {
 
   _updateItem(MyNoteItem: HTMLLIElement) {
     const { id } = MyNoteItem.dataset;
-    console.log(`update item ${id}`);
+    const Form = MyNoteItem.querySelector("form") as HTMLFormElement;
+
+    let data: { [key: string]: string } = {};
+    Array.from(Form.elements).forEach((field: HTMLInputElement) => {
+      if (field.nodeName === "BUTTON") return;
+
+      data[field.name] = field.value;
+    });
+
+    console.log(`update item ${id}: `, data);
   }
 
   _deleteItem(MyNoteItem: HTMLLIElement) {

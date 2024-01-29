@@ -1,6 +1,6 @@
 import { ResultEvent } from "../../types";
 
-class ResultEvent {
+class ResultEventClass {
   data;
   constructor(data?: ResultEvent[]) {
     this.data = data ?? [];
@@ -38,4 +38,4 @@ class ResultEvent {
   }
 }
 
-export default ResultEvent;
+export default ResultEventClass;
